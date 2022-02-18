@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     phone:String,
     role:{type: mongoose.Schema.ObjectId, ref:"roles"},
     registerDate:{type: Date,default:Date.now},
-    dbstatus:true
+    dbstatus:Boolean
 });
 
 const user = mongoose.model("users",userSchema);
