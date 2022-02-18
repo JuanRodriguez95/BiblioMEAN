@@ -5,6 +5,6 @@ import authorValidate from "../middleware/authorValidate.js";
 const router = express.Router();
 
 router.post('/registerAuthor',authorValidate.existingAuthor,authorController.registerAuthor);
-router.get('/listAuthor',authorController.listAuthor);
+router.get('/listAuthor/:name?',authorController.listAuthor);
 
 export default router;

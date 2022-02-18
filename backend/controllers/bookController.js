@@ -29,7 +29,7 @@ const registerBook =async(req,res)=>{
 
 }
 const listBooks =async(req,res)=>{
-    let booksList = await book.find().populate("author")
+    let booksList = await book.find({name: new RegExp(req.params["name"])}).populate("author")
     .exec();
     if(booksList.length === 0)
         return res.status(204).send({message: "Not Content"});

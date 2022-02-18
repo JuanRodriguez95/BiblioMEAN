@@ -25,7 +25,7 @@ const registerAuthor = async(req,res)=>{
     return res.status(200).send({message:"Success"});
 }
 const listAuthor= async(req,res)=>{
-    let authorsList = await author.find();
+    let authorsList = await author.find({name: new RegExp(req.params["name"])});
     if(authorsList.length === 0)
         return res.status(204).send({message: "Not Content"});
     return res.status(200).send({authorsList});

@@ -9,16 +9,6 @@ import { userValidator } from "../helpers/validator.js";
 import role from "../models/role.js";
 
 const registerUser = async (req, res) => {
-  console.log(req.body);
-  // console.log(req.params);
-  // if(!userValidator)
-  //     return res.status(400).send({message:"Incomplete Data"});
-
-  // const existingUser = await user.findOne( {email: req.body.email} );
-
-  // if(existingUser)
-  //     return res.status(409).send({message:"the user is already been registred in the database"});
-
   const passHash = await bcrypt.hash(req.body.password, 10);
 
   const userSchema = new user({
