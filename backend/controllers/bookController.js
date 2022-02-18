@@ -8,11 +8,12 @@ import book from "../models/book.js";
     dbstatus:Boolean*/
 
 const registerBook =async(req,res)=>{
-    const {name,author,pages,genre,rating,codeAuthor}= req.body;
+    const {name,author,pages,genre,ISBN}= req.body;
 
     let bookSchema = new book({
         name:name,
         author:author._id,
+        ISBN:ISBN,
         pages:pages,
         genre:genre,
         rating:0,
