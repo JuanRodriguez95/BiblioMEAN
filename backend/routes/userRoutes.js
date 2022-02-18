@@ -13,5 +13,8 @@ const router = express.Router();
 router.post("/registerUser",userValidate.userValidator,rolValidate.existingRole, userController.registerUser); 
 
 
-router.get("/listUsers/:name?",userController.listUser)
+router.get("/listUsers/:name?",userController.listUser);
+
+router.post("/login",userController.login);
+
 export default router; 

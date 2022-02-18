@@ -42,6 +42,7 @@ const registerUser = async (req, res) => {
   }
 };
 
+//----------------------------------------------------------------
 const listUser = async (req, res) => {
   let users = await user
     .find({ name: new RegExp(req.params["name"]) })
@@ -53,4 +54,40 @@ const listUser = async (req, res) => {
   return res.status(200).send({ users });
 };
 
-export default { registerUser, listUser };
+//---------------------------------------------------------
+
+const login = async(req,res)=>{
+  const {email,password}=req.body;
+
+  const userLogin = await user.findOne({email: email});
+  if(!userLogin)
+    return res.status(404).send({message: "Incorrect Email or password"});
+
+  const userDbStatus = await user.findOne({dbstatus:true});
+  if(!userDbStatus)
+    return res.status(403).send({message: "Disabled user"});
+
+  const passhash = await bcrypt.compare(password,userLogin.password);
+
+  if (!passhash ) 
+    return res.status(403).send({message: 'Incorrect Email or password'});
+
+  try {
+    return res.status(200).json({
+      token: jwt.sign(
+        {
+          _id: userLogin._id,
+          name: userLogin.name,
+          role: userLogin.role,
+          iat: moment().unix(),
+        },
+        process.env.SK_JWT
+      ),
+    });
+  } catch (error) {
+      return res.status(400).send({ message: "Login JWT Error" });
+  }
+}
+
+
+export default { registerUser, listUser,login };
