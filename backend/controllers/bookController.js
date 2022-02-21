@@ -18,7 +18,7 @@ const registerBook =async(req,res)=>{
     const result = await bookSchema.save();
 
     if(!result)
-        return res.status(404).send({message: "Failed book register"});
+        return res.status(500).send({message: "Failed book register"});
 
     return res.status(200).send({message:"Success, book register"})
 
@@ -61,7 +61,7 @@ const updateBook=async(req,res)=>{
     });
 
     return !books
-    ? res.status(400).send({message:"Updated Book Error"})
+    ? res.status(500).send({message:"Updated Book Error"})
     : res.status(200).send({message:"Success Update"});
 
 }
