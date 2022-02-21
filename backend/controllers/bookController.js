@@ -48,7 +48,7 @@ const deleteBooks=async(req,res)=>{
 const updateBook=async(req,res)=>{
     const{_id,name,author,ISBN,pages,genre,rating}=req.body
     if(!_id)
-        return res.status(404).send({message: "Incomplete Data"});
+        return res.status(400).send({message: "Incomplete Data"});
     const authorBook = await authorModel.findOne({_id:author});
     if(!authorBook) return res.status(404).send({message: "Author not found"});
     const books = await book.findByIdAndUpdate(_id,{
@@ -57,7 +57,7 @@ const updateBook=async(req,res)=>{
         ISBN:ISBN,
         pages:pages,
         genre:genre,
-        rating:rating
+        rating:rating 
     });
 
     return !books
