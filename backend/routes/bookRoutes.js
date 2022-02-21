@@ -6,5 +6,7 @@ const router = express.Router();
 
 router.post('/registerBook', bookValidate.existingBook,bookController.registerBook);
 router.get('/listBook/:name?',bookController.listBooks);
+router.put('/deleteBook/:_id',bookController.deleteBooks);
+router.put('/updateBook',bookController.updateBook);
 
 export default router;

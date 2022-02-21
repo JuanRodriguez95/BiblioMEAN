@@ -15,6 +15,15 @@ router.post("/registerUser",userValidate.userValidator,rolValidate.existingRole,
 
 router.get("/listUsers/:name?",userController.listUser);
 
+router.get("/listUsersAdmin/:name?",userController.listUserAdmin);
+
+
 router.post("/login",userController.login);
+
+router.put("/deleteUser/:_id",userController.deleteUser);
+
+router.put("/updateUser",userController.updateUserAdmin);
+
+
 
 export default router; 

@@ -7,7 +7,7 @@ const existingRole = async(req,res,next) =>{
     if(!roleId)
         return res.status(500).send({message:"No role was assigned"});
     req.body.role=roleId._id;
-next();
+    next();
 };
 
 export default {existingRole}

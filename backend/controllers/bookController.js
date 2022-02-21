@@ -1,11 +1,6 @@
 import book from "../models/book.js";
+import authorModel from "../models/author.js"
 
-/**     name:String,
-    autor:{type: mongoose.Schema.ObjectId, ref:"authors"},
-    pages:Number,
-    genre:String,
-    registerDate:{type:Date,default:Date.now},
-    dbstatus:Boolean*/
 
 const registerBook =async(req,res)=>{
     const {name,author,pages,genre,ISBN}= req.body;
@@ -17,7 +12,7 @@ const registerBook =async(req,res)=>{
         pages:pages,
         genre:genre,
         rating:0,
-        dbStatus:true
+        dbstatus:true
     });
 
     const result = await bookSchema.save();
@@ -36,11 +31,39 @@ const listBooks =async(req,res)=>{
 
     return res.status(200).send({booksList});
 }
+
+
 const deleteBooks=async(req,res)=>{
-    
+    const{_id}= req.params;
+    if(!_id) return res.status(400).send({message:"Invalid Data"});
+
+    const books = await book.findByIdAndUpdate(_id,{
+        dbstatus:false
+    });
+
+    return !books
+    ? res.status(400).send({message:"Deleting Error"})
+    : res.status(200).send({message:"Success Deleted"});
 }
 const updateBook=async(req,res)=>{
-    
+    const{_id,name,author,ISBN,pages,genre,rating}=req.body
+    if(!_id)
+        return res.status(404).send({message: "Incomplete Data"});
+    const authorBook = await authorModel.findOne({_id:author});
+    if(!authorBook) return res.status(404).send({message: "Author not found"});
+    const books = await book.findByIdAndUpdate(_id,{
+        name:name,
+        author:authorBook,
+        ISBN:ISBN,
+        pages:pages,
+        genre:genre,
+        rating:rating
+    });
+
+    return !books
+    ? res.status(400).send({message:"Updated Book Error"})
+    : res.status(200).send({message:"Success Update"});
+
 }
 
-export default {registerBook,listBooks}
+export default {registerBook,listBooks,deleteBooks,updateBook}

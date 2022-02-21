@@ -6,5 +6,7 @@ const router = express.Router();
 
 router.post('/registerAuthor',authorValidate.existingAuthor,authorController.registerAuthor);
 router.get('/listAuthor/:name?',authorController.listAuthor);
+router.put('/updateAuthor',authorController.updateAuthor);
+router.put('/deleteAuthor/:_id',authorController.deleteAuthor)
 
 export default router;
