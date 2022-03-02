@@ -1,0 +1,25 @@
+.bgHeader{
+    background-color: white;
+    margin-top: 15px;
+}
+
+.headerSpacer {
+    flex: 1 1 auto;
+  }
+   
+  a {
+    text-decoration: none;
+    color: black;
+    font-size: large;
+  }
+
+  a:hover{
+      color: white;
+      transition-duration: 0.4s;
+      background-color: gray;
+  }
+   
+  ul {
+    margin: auto;
+  }
+  

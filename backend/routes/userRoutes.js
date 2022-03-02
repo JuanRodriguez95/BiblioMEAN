@@ -6,9 +6,6 @@ import rolValidate from "../middleware/rolValidate.js";
 
 const router = express.Router();
 
-// router.post("/registerUser/:email/:idAnimal",(req,res)=>{
-//     res.status(200).send({ message: req.params.email +  req.params.idAnimal });
-// });
 
 router.post("/registerUser",userValidate.userValidator,rolValidate.existingRole, userController.registerUser); 
 
