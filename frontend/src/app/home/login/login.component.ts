@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next:(v)=>{
           localStorage.setItem("token",v.token);
-          this._router.navigate(['/listTask']);
+          this._router.navigate(['/books']);
           this.message ='Success Login';
           this.openSnackBarSuccessfull();
         },

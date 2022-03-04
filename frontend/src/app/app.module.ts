@@ -20,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginComponent } from './home/login/login.component';
+import { BookComponent } from './board/book/book.component';
 
 
 
@@ -30,7 +31,8 @@ import { LoginComponent } from './home/login/login.component';
     HeaderComponent,
     FooterComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
